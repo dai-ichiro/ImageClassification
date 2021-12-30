@@ -8,8 +8,8 @@ train_df = pd.read_pickle('train_df.pkl')
 train_dataset = ImageDataset(train_df)
 
 predictor = ImagePredictor()
-model = Categorical('resnet18_v1b')
-hyperparameters = {'model':model, 'batch_size':4, 'epochs': 3}
+model = Categorical('resnet101_v1d')
+hyperparameters = {'model':model, 'batch_size':32, 'epochs': 5}
 hyperparameter_tune_kwargs={'num_trials': 2}
 predictor.fit(
     train_dataset, 
