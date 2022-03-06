@@ -1,10 +1,7 @@
-import os
 import pandas as pd
 from autogluon.text.automm import AutoMMPredictor
 
 train_df = pd.read_pickle('train_df.pkl')
-
-train_df['image'] = train_df['image'].apply(lambda x: os.path.abspath(x))
 
 predictor = AutoMMPredictor(label='label')
 predictor.fit(
