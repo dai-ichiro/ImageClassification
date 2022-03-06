@@ -1,14 +1,11 @@
+import os
 import pandas as pd
-from autogluon.vision import ImageDataset
-from autogluon.vision import ImagePredictor
+from autogluon.text.automm import AutoMMPredictor
 
 test_df = pd.read_pickle('test_df.pkl')
+test_df['image'] = test_df['image'].apply(lambda x: os.path.abspath(x))
 
-test_dataset = ImageDataset(test_df)
+predictor = AutoMMPredictor.load('my_saved_dir')
 
-predictor = ImagePredictor.load('predictor.ag')
-
-result = predictor.evaluate(test_dataset)
-
-print('Top-1 test acc: %.3f' % result['top1'])
-
+score = predictor.evaluate(test_df, metrics=["accuracy"])
+print(score)
