@@ -1,8 +1,9 @@
-from autogluon.vision import ImagePredictor
+import pandas as pd
+from autogluon.text.automm import AutoMMPredictor
 
-predictor = ImagePredictor.load('predictor.ag')
+predictor = AutoMMPredictor.load('my_saved_dir')
 
-proba = predictor.predict_proba('test1.jpg')
-
+test_pic = "test1.jpg"
+proba = predictor.predict_proba(pd.DataFrame({'image':[test_pic]}))
 print(proba)
 
